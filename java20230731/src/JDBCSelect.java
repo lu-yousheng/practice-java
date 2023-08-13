@@ -24,7 +24,7 @@ public class JDBCSelect {
         }
         resultSet.close();
         statement.close();
-        connection.close();111q
+        connection.close();
 
      }
 }
