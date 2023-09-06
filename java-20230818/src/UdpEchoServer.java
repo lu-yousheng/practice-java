@@ -1,5 +1,3 @@
-package network;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -30,7 +28,7 @@ public class UdpEchoServer {
             DatagramPacket requestPacket = new DatagramPacket(new byte[4096],4096);
             socket.receive(requestPacket);
             //此时这个DatagramPacket是一个特殊的对象,并不方便直接处理,可以把里面的数据拿出来,构造成一个字符串
-            String request = new String(requestPacket.getData(),0,requestPacket.getLength());
+            String request = new String(requestPacket.getData(),0,requestPacket.getLength(),"UTF-8");
             //2,根据请求计算响应,由于此处是回显服务器,响应和请求相同
             String response = process(request,requestPacket);
             //3.把响应返回客服端,send的参数也是Datagrampacket
@@ -64,7 +62,7 @@ public class UdpEchoServer {
 
     private String onlineConnection(DatagramPacket requestPacket) throws IOException {
         if (onlineServer() == 0) {
-
+            
             while (true) {
                 //发送消息
                 Scanner scanner = new Scanner(System.in);
@@ -78,7 +76,7 @@ public class UdpEchoServer {
                 DatagramPacket requestPacket1 = new DatagramPacket(new byte[4096],4096);
                 socket.receive(requestPacket1);
                 //此时这个DatagramPacket是一个特殊的对象,并不方便直接处理,可以把里面的数据拿出来,构造成一个字符串
-                String request1 = new String(requestPacket1.getData(),0,requestPacket1.getLength());
+                String request1 = new String(requestPacket1.getData(),0,requestPacket1.getLength(),"UTF-8");
                 System.out.printf("%s %d : %s\n",requestPacket.getAddress(),requestPacket.getPort(),request1);
                 if (request1.equals("exit")) break;
 
@@ -108,4 +106,3 @@ public class UdpEchoServer {
         server.start();
     }
 }
-

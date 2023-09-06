@@ -44,7 +44,7 @@ public class TcpEchoClient {
     }
 
     public static void main(String[] args) throws IOException {
-        TcpEchoClient tcpEchoClient = new TcpEchoClient("111.124.55.164",9000);
+        TcpEchoClient tcpEchoClient = new TcpEchoClient("25.42.138.194",9000);
         tcpEchoClient.start();
     }
 }
