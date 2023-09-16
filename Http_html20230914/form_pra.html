@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习</title>
+</head>
+<body>
+    <!-- form表单标签,允许用户和服务器之间交互数据 -->
+    <!-- 提交的数据以键值对的结构组织 -->
+    <!-- <form action="https://www.sogou.com" method="post">
+        <input type="text" name="studentname">
+        <input type="submit" value="提交">
+    </form> -->
+    <script src="js/jquery_cdn_min.js"></script>
+    <script>
+        // $jquery中,$是一个特殊的全局对象
+        // jquery中的api都是以$的方法的形式引出来的  
+        $.ajax({
+            type:'get',
+            url:'https://www.sogou.com?studentName=zhangsan',
+            success:function(data) {
+                console.log("服务器返回的响应到了")
+            }
+        });
+        console.log("浏览器执行后面的代码了");
+    </script>
+</body>
+</html>
