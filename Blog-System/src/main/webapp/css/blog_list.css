@@ -1,0 +1,42 @@
+/* 给博客列表页的样式 */
+.blog {
+    width: 100%;
+    padding: 20px;
+}
+.blog .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.blog .data {
+    text-align: center;
+    color: rgb(85, 125, 86);
+    padding: 10px;
+}
+
+.blog .desc {
+    text-indent: 2em;
+}
+
+.blog a{
+    display: block;
+    width: 110px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    border-radius: 10px;
+    transition: all 0.8s;
+}
+
+.blog a:hover {
+    color: white;
+    background: #647926;
+}
