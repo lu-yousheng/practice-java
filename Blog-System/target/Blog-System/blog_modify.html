@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客修改页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_edit.css">
+    <script src="js/jquery_cdn_min.js"></script>
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css">
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
+
+</head>
+<body>
+      <!--导航栏-->
+      <div class="nav">
+        <img src="img/logo.jpg" alt="">
+        <span class="title">我的博客系统</span>
+        <div class="spacer"></div>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+        <a href="logout">注销</a>
+    </div>
+    <div class="blog-edit-container">
+        <form action="edit" method="post" style="height: 100%">
+        <!-- 编辑区的容器 -->
+        <div class="title">
+            <input type="text" id="hide" name="blogId">
+            <input type="text" id="title" placeholder="请输入文章标题" name="title" >
+            <input id="submit" value="保存" type="submit">
+        </div>
+        <div id = "editor" class="editors">
+            <textarea name="content" style="display:none"></textarea>
+        </div>
+        </form>
+    </div>
+    <script>
+        // 初始化代码,创建一个editor对象
+        var editor = editormd("editor",{
+            width:"100%",
+            height:"calc(100% - 100px)",
+            makdown:"# 在这里写下一篇博客",
+            path:"editor.md/lib/"
+        }
+        )
+        function checkLogin(){
+            $.ajax({
+                type: 'get',
+                url: 'login',
+                success:function (body) {
+                    if (body.userId && body.userId >0) {
+                        console.log("用户登录成功!")
+                    }else {
+                        //当前未登录,强制回到登录页面
+                        location.assign("login.html");
+                    }
+                }
+            });
+        }
+        checkLogin();
+        function checkData(){
+            $.ajax({
+                type:'get',
+                url:'edit'+location.search,
+                success:function(body) {
+                    if (body == null) {
+                        return;
+                    }else{
+                        //将接受的数据返回到editor编辑器
+                        let title = document.querySelector('#title');
+                        title.value = body.title;
+                        let content = document.querySelector('.blog-edit-container .editors textarea');
+                        content.innerHTML = body.content;
+                        let hide = document.querySelector('#hide');
+                        hide.value = body.blogId;
+                    }
+                }
+            })
+        }
+        checkData();
+        $("#submit").click(function(){ 
+            $.ajax({
+                type:'post',
+                url:'edit'+location.search,
+                success:function(){
+                    location.assign("blog_list.html");
+                }
+            })
+        })
+    </script>
+</body>
+</html>
