@@ -11,7 +11,7 @@ public class DBUtil {
     static {
         ((MysqlDataSource)dataSource).setURL("jdbc:mysql://127.0.0.1:3306/Servlet?characterEncoding=utf8&useSSL=false");
         ((MysqlDataSource)dataSource).setUser("root");
-        ((MysqlDataSource)dataSource).setPassword("123456");
+        ((MysqlDataSource)dataSource).setPassword("");
     }
 
     public static Connection getConnection() throws SQLException {
